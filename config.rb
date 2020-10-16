@@ -6,6 +6,7 @@ ignore /stylesheets.*/
 
 activate :directory_indexes
 activate :dato
+activate :i18n, :mount_at_root => :false, :langs => [:en, :fr]
 activate :pagination
 
 activate :external_pipeline,
@@ -29,10 +30,13 @@ helpers do
   end
 end
 
-dato.tap do |dato|
-  paginate dato.works, "", "/templates/works.html", per_page: 5
+# dato.tap do |dato|
+#   paginate dato.works, "", "/templates/works.html", per_page: 5
 
-  dato.works.each do |work|
-    proxy "/works/#{work.slug}/index.html", "/templates/work.html", locals: { work: work }
-  end
-end
+#   dato.works.each do |work|
+#     proxy "/works/#{work.slug}/index.html", "/templates/work.html", locals: { work: work }
+#   end
+# end
+
+# Redirect
+redirect "index.html", :to => "en/index.html"
